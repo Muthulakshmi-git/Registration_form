@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+
+    <style>
+        body {
+            background-color: darkgray;
+            width: 90%;
+
+        }
+
+        body h1 {
+            margin-top: 6%;
+            margin-left: 37%;
+        }
+
+        .form {
+            background-color: white;
+            width: 300px;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 6%;
+            margin-left: 35%;
+
+        }
+
+        @media screen and (max-width:600px) {
+            .form {
+                margin-left: 20%;
+                margin-top: 19%;
+            }
+
+            body h1 {
+                margin-top: 20%;
+                margin-left: 27%;
+            }
+        }
+
+        .form input {
+            width: 100%;
+            height: 20px;
+
+        }
+
+        .form button {
+            width: 100%;
+            height: 20px;
+            background-color: darkgray;
+            border: none;
+        }
+
+        #names,
+        #mail,
+        #pw {
+            padding-left: 0;
+        }
+
+        #nameerror,
+        #mailerror,
+        #pwerror {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Registration Form</h1>
+    <form class="form">
+        <table>
+            <div>
+                <label for="names"><strong>Name:</strong></label><br>
+                <input type="text" id="names">
+                <p id="nameerror"></p>
+            </div>
+            <div>
+                <label for="mail"><strong>EMail:</strong></label><br>
+                <input type="text" id="mail">
+                <p id="mailerror"></p>
+            </div>
+            <div>
+                <label for="pw"><strong>Password:</strong></label><br>
+                <input type="password" id="pw">
+                <p id="pwerror"></p>
+            </div>
+            <div>
+                <button type="submit" id="btn" disabled>Submit</button>
+            </div>
+        </table>
+    </form>
+
+
+
+    <script>
+        var names = document.getElementById("names")
+        var mail = document.getElementById("mail")
+        var pw = document.getElementById("pw")
+        var btn = document.getElementById("btn")
+
+        var nameerror = document.getElementById("nameerror")
+        var mailerror = document.getElementById("mailerror")
+        var pwerror = document.getElementById("pwerror")
+
+
+
+        names.addEventListener("input", function () {
+
+            if (names.value.trim() === "") {
+                nameerror.textContent = "Name is required"
+            }
+            else {
+                nameerror.textContent = ""
+            }
+            checkallfields();
+        });
+
+
+        mail.addEventListener("input", function () {
+            var mailvalue = mail.value
+            if (mailvalue.includes("@") && mailvalue.includes(".com")) {
+                mailerror.textContent = ""
+            }
+            else {
+                mailerror.textContent = "Enter a valid Email address"
+            }
+            checkallfields();
+        });
+
+        pw.addEventListener("input", function () {
+            var pwvalue = pw.value
+            if (pwvalue.length < 6) {
+                pwerror.textContent = "Password must be contain atleast 6 characters"
+            }
+            else {
+                pwerror.textContent = ""
+            }
+            checkallfields();
+        });
+        function checkallfields() {
+            if (
+                names.value.trim() !== "" &&
+                mail.value.includes("@") &&
+                mail.value.includes(".com") &&
+                pw.value.length >= 6
+            ) {
+                btn.disabled = false;
+            }
+            else {
+                btn.disabled = true;
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
